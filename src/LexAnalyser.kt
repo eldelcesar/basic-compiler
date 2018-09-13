@@ -3,14 +3,15 @@ import java.io.File
 
 class LexAnalyser {
 
-    private var tokens: SymbolsTable = SymbolsTable()
-    private var errors: SymbolsTable = SymbolsTable()
-    private var symbolTable: SymbolsTable = SymbolsTable()
-    private var buffer: String = ""
-    private var lineCounter: Int = 0
-    private var charCounter: Int = 0
-    private var test: String = ""
+    private var tokens = SymbolsTable()
+    private var errors = SymbolsTable()
+    private var symbolTable = SymbolsTable()
+    private var buffer = ""
+    private var lineCounter = 0
+    private var charCounter = 0
+    private var test = ""
 
+    // Executes the Lex Analysis and returns either the tokens table or the symbols table
     fun runLexAnalysis(file: String): MutableList<SymbolsTable> {
         val arr: MutableList<SymbolsTable> = mutableListOf<SymbolsTable>()
         readFile(file)
@@ -25,7 +26,7 @@ class LexAnalyser {
         return arr
     }
 
-
+    // Reads the File
     private fun readFile(fileName: String) {
         File(fileName).forEachLine {
             lineCounter++
