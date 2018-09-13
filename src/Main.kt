@@ -1,3 +1,4 @@
+import enums.SyntacticStatusEnum
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -24,16 +25,25 @@ fun main(args: Array<String>) {
         if (lexResult.size > 1) {
             val t1 = "\n––––––––––––––––– TOKENS –––––––––––––––––\n"
             val t2 = "\n\n––––––––––––––––– SYMBOLS –––––––––––––––––\n"
-            val t3 = "COMPLETED: SUCCESSFUL LEX ANALYSIS"
+            val t3 = "COMPLETED: SUCCESSFUL LEX ANALYSIS\n"
             val text = t1 + lexResult[0] + t2 + lexResult[1] + t3
 
             // Write file and show status in terminal
             outFile.writeText(text)
             print(text)
+
+            // Run the Syntactic Analysis
+            var syn = SynAnalyser(lexResult[0], lexResult[1])
+            var synResult = syn.runSynAnalysis()
+
+            if (syn.getStatus().equals(SyntacticStatusEnum.CORRECT)) {
+                // print("\n––––––––––– SYMBOLS ––––––––––––\n" + synResult)
+            }
+
         }
         else {
             val t1 = "\n––––––––––––––––– ERRORS –––––––––––––––––\n"
-            val t2 = "ERROR: LEX ANALYSIS FAILED"
+            val t2 = "ERROR: LEX ANALYSIS FAILED\n"
             val text = t1 + lexResult[0] + t2
 
             // Write file and show status in terminal

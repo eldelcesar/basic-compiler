@@ -1,3 +1,5 @@
+import enums.TokenTypeEnum
+
 class SymbolsTable {
 
     private var table: MutableList<Token> = mutableListOf()
@@ -11,6 +13,10 @@ class SymbolsTable {
             return false
         }
         return true
+    }
+
+    fun getTable(): MutableList<Token>{
+        return table
     }
 
     override fun toString(): String {

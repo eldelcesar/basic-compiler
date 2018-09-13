@@ -1,6 +1,6 @@
 import enums.TokenTypeEnum
 
-class Token(val keySym: String, val contentSym: String, var lineNumber: Int, var charNumber: Int, var tokenType: TokenTypeEnum) {
+class Token(private val keySym: String, private val contentSym: String, private var lineNumber: Int, private var charNumber: Int, private var tokenType: TokenTypeEnum) {
 
     fun getKey(): String { return keySym }
 
