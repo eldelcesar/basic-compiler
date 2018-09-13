@@ -1,3 +1,4 @@
+import java.io.File
 import java.io.FileNotFoundException
 
 // All code is available on https://github.com/eldelcesar/basic-compiler
@@ -10,21 +11,34 @@ fun main(args: Array<String>) {
         print("Welcome to the program compiler!\nEnter the file (with path) of the file: \n")
         val input = readLine()!!
 
+        // Run Lex Analyser
         var lex = LexAnalyser()
         var lexResult = lex.runLexAnalysis(input)
-        println("Running Lex Analyser on '$input' file...")
 
+        // Prepare output file
+        val output = "symbolTable.txt"
+        var outFile = File(output)
+
+        // Expect result
+        println("Running Lex Analyser on '$input' file...")
         if (lexResult.size > 1) {
-            print("\n––––––––––––––––– TOKENS –––––––––––––––––\n")
-            print(lexResult[0])
-            print("\n\n––––––––––––––––– SYMBOLS –––––––––––––––––\n")
-            print(lexResult[1])
-            print("SUCCESSFUL LEX ANALYSIS")
+            val t1 = "\n––––––––––––––––– TOKENS –––––––––––––––––\n"
+            val t2 = "\n\n––––––––––––––––– SYMBOLS –––––––––––––––––\n"
+            val t3 = "COMPLETED: SUCCESSFUL LEX ANALYSIS"
+            val text = t1 + lexResult[0] + t2 + lexResult[1] + t3
+
+            // Write file and show status in terminal
+            outFile.writeText(text)
+            print(text)
         }
         else {
-            print("\n––––––––––––––––– ERRORS –––––––––––––––––\n")
-            print(lexResult[0])
-            print("ERROR: FAILED LEX ANALYSIS")
+            val t1 = "\n––––––––––––––––– ERRORS –––––––––––––––––\n"
+            val t2 = "ERROR: LEX ANALYSIS FAILED"
+            val text = t1 + lexResult[0] + t2
+
+            // Write file and show status in terminal
+            outFile.writeText(text)
+            print(text)
         }
     }
     catch (err: FileNotFoundException){
